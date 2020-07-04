@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buttonventure</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+
+    <style>
+
+        body
+        {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            padding: 115px;
+        }
+
+        .grid
+        {
+            display: grid;
+        }
+
+        #difficulty_menu
+        {
+            border-radius: 10px;
+            background-origin: padding-box;
+            background: #424242;
+            grid-gap: 50px;
+            height: 77vh;
+            padding: 50px;
+        }
+
+        .EasyButton 
+        {
+            background-color:#44c767;
+            border-radius:28px;
+            border:1px solid #18ab29;
+            display:inline-block;
+            cursor:pointer;
+            color:#ffffff;
+            font-family:Arial;
+            font-size:17px;
+            padding:16px 31px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #2f6627;
+        }
+        .EasyButton:hover 
+        {
+            background-color:#5cbf2a;
+        }
+        .EasyButton:active 
+        {
+            position:relative;
+            top:1px;
+        }
+
+        .DevButton 
+        {
+            box-shadow: 3px 4px 0px 0px #8a2a21;
+            background:linear-gradient(to bottom, #c62d1f 5%, #f24437 100%);
+            background-color:#c62d1f;
+            border-radius:18px;
+            border:1px solid #d02718;
+            display:inline-block;
+            cursor:pointer;
+            color:#ffffff;
+            font-family:Arial;
+            font-size:17px;
+            padding:7px 25px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #810e05;
+        }
+        .DevButton:hover 
+        {
+            background:linear-gradient(to bottom, #f24437 5%, #c62d1f 100%);
+            background-color:#f24437;
+        }
+        .DevButton:active
+        {
+            position:relative;
+            top:1px;
+        }
+
+        .ZuccButton {cursor:pointer; background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%); border-radius: 100px;}
+        .ZuccButton:hover { background-position: right center; }
+
+
+        .block
+        {
+            display: block;
+        }
+
+        .hidden
+        {
+            display: none;
+        }
+
+        button
+        {
+            height: 150px;
+            width: 40vw;
+            display: block;
+            margin: auto;
+        }
+
+    </style>
+</head>
+<body onload="randomcolorbg();" style="background: #424242;" onclick="randomcolorbg();" id="body">
+
+ <div>
+     
+
+    <div class="grid" id="difficulty_menu">
+        <h1 style="color: white; text-align: center;">Choose a Difficulty</h1>
+        <button onclick="lvl('easy', 1)" class="EasyButton">Easy</button>
+        <button onclick="" class="DevButton">Dev</button>
+        <button onclick="" class="ZuccButton">Zucc</button>
+
+    </div>
+
+    <div  class="hidden" id="Easy">
+        <div  class="hidden" id="Easy1">
+            <button type="button" class="btn btn-success">Click me !</button>
+        </div>
+        <div  class="hidden" id="Easy2"></div>
+        <div  class="hidden" id="Easy3"></div>
+        <div  class="hidden" id="Easy4"></div>
+        <div  class="hidden" id="Easy5"></div>
+        <div  class="hidden" id="Easy6"></div>
+        <div  class="hidden" id="Easy7"></div>
+        <div  class="hidden" id="Easy8"></div>
+        <div  class="hidden" id="Easy9"></div>
+        <div  class="hidden" id="Easy10"></div>
+    </div>
+
+ </div>
+
+</body>
+<script>
+
+    function randomcolorbg() {
+        var randomColor = "#"+((1<<24)*Math.random()|0).toString(16); 
+        var randomColor2 = "#"+((1<<24)*Math.random()|0).toString(16); 
+        document.getElementById('body').style.background = `linear-gradient(${randomColor}, ${randomColor2})`
+    }
+
+    function lvl(diff, lvl) {
+        try {hideall();} 
+        catch (ror){console.log(ror);}
+
+        try 
+        {
+            showelement(diff, "grid");
+            showelement(diff+lvl, "grid");
+        }
+        catch (ror){console.log(ror);}
+    }
+
+    function hideall() {
+        hidelem("difficulty_menu", "grid");
+        var diffs = ["Easy", "Dev", "Zucc"]
+        for (var i = 0; i < diffs.length; i++) {
+            hidelem(diffs[i], "grid");
+            hidelem(diffs[i], "block");
+            for (var o = 0; o < 10; o++) {
+                hidelem(diffs[i]+o, "grid");
+                hidelem(diffs[i]+o, "block");
+            }
+        }
+    }
+
+    function showelement(elem, as) {
+        console.log("elem", elem);
+        console.log("as", as);
+        document.getElementById(elem).className = document.getElementById(elem).className.replace("hidden", as);
+    }
+    function hidelem(elem, from) {
+        console.log("elem", elem);
+        console.log("from", from);
+        document.getElementById(elem).className = document.getElementById(elem).className.replace(from, "hidden");
+    }
+</script>
+
+</html>
